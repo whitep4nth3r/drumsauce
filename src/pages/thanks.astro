@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import PageSubtitle from "../components/PageSubtitle.astro";
+import { makeOgImageUrl } from "../lib/cloudinary";
+
+const pageUrl = `${Astro.site}request`;
+const ogUrl = makeOgImageUrl("Request a transcription");
+---
+
+<Layout
+  title="Thank you for your request"
+  description="Thank you for your transcription request. I'll contact you when it is up on the site."
+  image={ogUrl}
+  url={pageUrl}
+  active="request"
+>
+  <div class="top">
+    <PageHeader text="Thank you for your request" />
+    <p>I'll contact you when it is up on the site. ♥</p>
+  </div>
+</Layout>
+
+<style>
+  .top {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--color-fg);
+    text-align: right;
+  }
+</style>

@@ -9,9 +9,9 @@ const { transcription } = Astro.props;
     <img
       style={`view-transition-name: album-cover-${transcription.slug};`}
       alt={`Album cover for ${transcription.song} by ${transcription.artist}`}
-      height="500"
-      width="500"
-      src={`https://coverartarchive.org/release/${transcription.mbReleaseId}/front-500`}
+      height="250"
+      width="250"
+      src={`https://coverartarchive.org/release/${transcription.mbReleaseId}/front-250`}
     />
   </div>
   <div class="inner">

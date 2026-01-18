@@ -11,6 +11,15 @@ const { url } = Astro.props;
   data-pdfjs-url={pdfjsUrl}
   data-worker-url={workerUrl}></canvas>
 
+<style>
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+</style>
+
 <script type="module">
   const canvas = document.getElementById("pdf-canvas");
 

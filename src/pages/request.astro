@@ -18,6 +18,93 @@ const ogUrl = makeOgImageUrl("Request a transcription");
   <div class="top">
     <PageHeader text="Request a transcription" />
     <PageSubtitle text="Fill out the form!" />
+    <p>
+      Looking for a drum transcription you can't find anywhere else on The
+      Internet? Complete this form and submit your request.
+    </p>
+    <p>
+      <em
+        >Disclaimer: I cannot make any guarantees that I will complete your
+        request due to my day job responsibilities, but if I add your request to
+        the site, I will email you to let you know.
+      </em>♥
+    </p>
+
+    <form
+      name="request"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      action="/thanks"
+      autocomplete="on"
+    >
+      <input type="hidden" name="form-name" value="request" />
+
+      <p style="display:none" aria-hidden="true">
+        <label>
+          Don't fill this out: <input name="bot-field" />
+        </label>
+      </p>
+
+      <div class="row">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          required
+          placeholder="Drum Sauce"
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="row">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="salma@drumsauce.net"
+          autocomplete="email"
+        />
+      </div>
+
+      <div class="row">
+        <label for="artist">Artist</label>
+        <input
+          type="text"
+          name="artist"
+          id="artist"
+          required
+          placeholder="Architects"
+        />
+      </div>
+
+      <div class="row">
+        <label for="song">Song</label>
+        <input
+          type="text"
+          name="song"
+          id="song"
+          required
+          placeholder="Doomsday"
+        />
+      </div>
+
+      <div class="row">
+        <label for="link">Link to track</label>
+        <input
+          type="url"
+          name="link"
+          id="link"
+          required
+          placeholder="https://youtube.com/..."
+        />
+      </div>
+
+      <button type="submit">Submit request</button>
+    </form>
   </div>
 </Layout>
 
@@ -26,5 +113,75 @@ const ogUrl = makeOgImageUrl("Request a transcription");
     display: flex;
     gap: 2rem;
     flex-direction: column;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--color-fg);
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  input {
+    font-size: 1rem;
+    padding: 1rem;
+    font-family: var(--font-main);
+    border-radius: var(--border-radius-base);
+    border: 0.125rem solid black;
+  }
+
+  input:focus,
+  input:focus-visible {
+    outline: 0.25rem solid var(--color-accent);
+    outline-offset: 0;
+  }
+
+  label {
+    font-family: var(--font-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-fg);
+    font-size: clamp(1rem, 2vw, 2rem);
+    padding: 1rem 0;
+    line-height: 1;
+  }
+
+  button {
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border: 0.25rem solid var(--color-accent);
+    background: var(--color-accent);
+    border-radius: var(--border-radius-base);
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+    font-size: 2rem;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  button:hover,
+  button:focus,
+  button:focus-visible {
+    outline: 0.25rem solid black;
+    outline-offset: 0;
   }
 </style>

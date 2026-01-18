@@ -3,13 +3,14 @@ import "../styles/global.css";
 import Logo from "../components/Logo.astro";
 
 const { title, description, image, url, active } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
@@ -38,7 +39,7 @@ const { title, description, image, url, active } = Astro.props;
           <Logo />
         </div>
         <header class="header">
-          <nav>
+          <nav class="nav">
             <ol class="header__navList">
               <li>
                 <a
@@ -75,6 +76,9 @@ const { title, description, image, url, active } = Astro.props;
         <slot />
       </main>
     </div>
+    <footer>
+      <p>&copy; DRUMSAUCE {year}</p>
+    </footer>
   </body>
 
   <style>
@@ -103,7 +107,6 @@ const { title, description, image, url, active } = Astro.props;
     .container {
       display: grid;
       grid-template-columns: 1fr;
-      padding: 1rem;
       gap: 3rem;
 
       @media screen and (min-width: 1000px) {
@@ -115,20 +118,29 @@ const { title, description, image, url, active } = Astro.props;
 
     .container__left {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 3fr 5fr;
       justify-content: space-between;
       align-items: flex-start;
       gap: 3rem;
+      overflow: visible;
 
       @media screen and (min-width: 1000px) {
         display: flex;
         flex-direction: column;
-        position: sticky;
-        top: 0;
       }
     }
 
     .container__right {
+      width: 100%;
+      display: block;
+      margin-bottom: 4rem;
+    }
+
+    .nav {
+      @media screen and (min-width: 1000px) {
+        position: relative;
+        height: 100vh;
+      }
     }
 
     .header {
@@ -138,8 +150,14 @@ const { title, description, image, url, active } = Astro.props;
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
+      align-self: flex-start;
       list-style: none;
       gap: clamp(1rem, 2vw, 2rem);
+
+      @media screen and (min-width: 1000px) {
+        position: sticky;
+        top: 1rem;
+      }
     }
 
     .header__link {
@@ -148,7 +166,7 @@ const { title, description, image, url, active } = Astro.props;
       text-transform: uppercase;
       font-weight: 600;
       color: var(--color-fg);
-      font-size: clamp(1rem, 3vw, 2.5rem);
+      font-size: clamp(1rem, 2vw, 2rem);
       padding: 1rem 0;
       border-radius: var(--border-radius-base);
     }
@@ -163,6 +181,20 @@ const { title, description, image, url, active } = Astro.props;
     .header__link:focus,
     .header__link:focus-visible {
       outline: 0.25rem solid var(--color-accent);
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 1rem;
+      @media screen and (min-width: 1000px) {
+        text-align: right;
+      }
+    }
+
+    footer p {
+      font-family: var(--font-display);
+      font-size: 2rem;
     }
   </style>
 </html>

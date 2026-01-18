@@ -38,6 +38,10 @@ body {
   scroll-behavior: smooth;
 }
 
+body {
+  padding: 1rem;
+}
+
 h1,
 h2,
 h3,
