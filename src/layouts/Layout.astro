@@ -48,7 +48,9 @@ const year = new Date().getFullYear();
     <div class="container">
       <div class="container__left">
         <div class="logo">
-          <Logo />
+          <a href="/">
+            <Logo />
+          </a>
         </div>
         <header class="header">
           <nav class="nav">
@@ -156,6 +158,11 @@ const year = new Date().getFullYear();
     }
 
     .header {
+    }
+
+    .logo a:focus,
+    .logo a:focus-visible {
+      outline: 0.25rem solid var(--color-accent);
     }
 
     .header__navList {
