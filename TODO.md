@@ -2,5 +2,4 @@
 
 - [] favicons
 - [] og images
-- [] buy domain
 - [] tracking
