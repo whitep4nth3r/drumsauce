@@ -11,6 +11,7 @@ const { transcription } = Astro.props;
       alt={`Album cover for ${transcription.song} by ${transcription.artist}`}
       height="250"
       width="250"
+      loading="lazy"
       src={`https://coverartarchive.org/release/${transcription.mbReleaseId}/front-250`}
     />
   </div>
@@ -81,6 +82,8 @@ const { transcription } = Astro.props;
     height: 100%;
     overflow: hidden;
     display: block;
+    position: relative;
+    background: var(--color-accent);
   }
 
   .image img {

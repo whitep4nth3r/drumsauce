@@ -5,18 +5,26 @@ import workerUrl from "pdfjs-dist/legacy/build/pdf.worker.mjs?url";
 const { url } = Astro.props;
 ---
 
-<canvas
-  id="pdf-canvas"
-  data-url={url}
-  data-pdfjs-url={pdfjsUrl}
-  data-worker-url={workerUrl}></canvas>
+<div class="wrapper">
+  <canvas
+    id="pdf-canvas"
+    data-url={url}
+    data-pdfjs-url={pdfjsUrl}
+    data-worker-url={workerUrl}></canvas>
+</div>
 
 <style>
+  .wrapper {
+    aspect-ratio: 1 / 1.414;
+    position: relative;
+    background: #f0f0f0;
+  }
+
   canvas {
-    display: block;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    max-width: 100%;
+    height: 100%;
   }
 </style>
 
