@@ -1,22 +1,168 @@
+---
+import "../styles/global.css";
+import Logo from "../components/Logo.astro";
+
+const { title, description, image, url, active } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:site_name" content="DRUMSAUCE" />
+    <meta property="og:url" content={url} />
+    {image && <meta property="og:image" content={image} />}
+
+    <meta
+      name="twitter:card"
+      content={image ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    {image && <meta name="twitter:image" content={image} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container__left">
+        <div class="logo">
+          <Logo />
+        </div>
+        <header class="header">
+          <nav>
+            <ol class="header__navList">
+              <li>
+                <a
+                  class={`header__link${active === "home" ? ` header__link--active` : ``}`}
+                  href="/">Home</a
+                >
+              </li>
+              <li>
+                <a
+                  class={`header__link${active === "transcriptions" ? ` header__link--active` : ``}`}
+                  href="/transcriptions">Transcriptions</a
+                >
+              </li>
+              <li>
+                <a
+                  class={`header__link${active === "request" ? ` header__link--active` : ``}`}
+                  href="/request">Request</a
+                >
+              </li>
+              <li>
+                <a
+                  class={`header__link${active === "about" ? ` header__link--active` : ``}`}
+                  href="/about">About</a
+                >
+              </li>
+              <li>
+                <a class="header__link" href="/rss.xml">Subscribe via RSS</a>
+              </li>
+            </ol>
+          </nav>
+        </header>
+      </div>
+      <main class="container__right">
+        <slot />
+      </main>
+    </div>
+  </body>
+
+  <style>
+    body {
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      background-image: url("/drip.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: bottom center;
+      transform: translate(-50%, 20%) rotate(180deg);
+      opacity: 0.05;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 1rem;
+      gap: 3rem;
+
+      @media screen and (min-width: 1000px) {
+        align-items: flex-start;
+        grid-template-columns: 2fr 3fr;
+        gap: 2rem;
+      }
+    }
+
+    .container__left {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 3rem;
+
+      @media screen and (min-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+      }
+    }
+
+    .container__right {
+    }
+
+    .header {
+    }
+
+    .header__navList {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      list-style: none;
+      gap: clamp(1rem, 2vw, 2rem);
+    }
+
+    .header__link {
+      font-family: var(--font-main);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--color-fg);
+      font-size: clamp(1rem, 3vw, 2.5rem);
+      padding: 1rem 0;
+      border-radius: var(--border-radius-base);
+    }
+
+    .header__link--active {
+      text-decoration: underline;
+      text-decoration-color: var(--color-accent);
+      text-underline-offset: 0.5rem;
+      text-decoration-thickness: 0.5rem;
+    }
+
+    .header__link:focus,
+    .header__link:focus-visible {
+      outline: 0.25rem solid var(--color-accent);
+    }
+  </style>
+</html>

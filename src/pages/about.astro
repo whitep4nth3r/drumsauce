@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import PageSubtitle from "../components/PageSubtitle.astro";
+import { makeOgImageUrl } from "../lib/cloudinary";
+
+const SITE_URL = Astro.site;
+const pageUrl = `${SITE_URL}about`;
+const ogUrl = makeOgImageUrl("About");
+---
+
+<Layout
+  title="About DRUMSAUCE"
+  description="Learn about the person behind DRUMSAUCE, how to request a transcription, and how to subscribe to new transcriptions via RSS."
+  image={ogUrl}
+  url={pageUrl}
+  active="about"
+>
+  <div class="top">
+    <PageHeader text="About DRUMSAUCE" />
+    <PageSubtitle text="What even is this?" />
+  </div>
+
+  <p>
+    DRUMSAUCE was created by <a href="https://whitep4nth3r.com"
+      >Salma Alam-Naylor</a
+    >. Salma has been a musician for 35 years, and started learning the drums in
+    2023.
+  </p>
+
+  <p>
+    Salma enjoys the process of transcribing drum parts for the deep insight it
+    gives her into a variety of playing styles and techniques, which helps her
+    playing improve. DRUMSAUCE is a catalogue of free PDF drum transcriptions
+    created by Salma. Each transcription also comes with a YouTube video for you
+    to listen along as you read the part.
+  </p>
+
+  <p>
+    You'll find an eclectic variety of transcriptions on DRUMSAUCE including
+    jazz, metal and rock tracks. If you're looking for a transcription you can't
+    find anywhere else, you can <a href="/request"
+      >request a transcription from DRUMSAUCE.</a
+    >
+  </p>
+
+  <p>
+    If you're into RSS feeds, you can also subscribe to the <a href="/rss.xml"
+      >DRUMSAUCE RSS feed</a
+    >.
+  </p>
+
+  <p>Happy drumming!</p>
+</Layout>
+
+<style>
+  .top {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--color-fg);
+  }
+
+  p a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+    text-decoration-thickness: 0.25rem;
+  }
+</style>

@@ -1,11 +1,37 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import type { Transcription } from "../types/transcription";
+import data from "../../data/transcriptions.json";
+import { makeOgImageUrl } from "../lib/cloudinary";
+import { latestN } from "../lib/transcriptions";
+import PageHeader from "../components/PageHeader.astro";
+import PageSubtitle from "../components/PageSubtitle.astro";
+import TranscriptionList from "../components/TranscriptionList.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const transcriptions: Transcription[] = data || [];
+const latest = latestN(transcriptions, 3);
+const pageUrl = Astro.site;
+const ogUrl = makeOgImageUrl("Free drum transcriptions");
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Free drum transcriptions by DRUMSAUCE"
+  description="Browse free PDF downloads of rock, metal and jazz music for drummers."
+  image={ogUrl}
+  url={pageUrl}
+  active="home"
+>
+  <div class="top">
+    <PageHeader text="Free drum transcriptions" />
+    <PageSubtitle text="Latest" />
+  </div>
+  <TranscriptionList transcriptions={latest} />
 </Layout>
+
+<style>
+  .top {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+  }
+</style>

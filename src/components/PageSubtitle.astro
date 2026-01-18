@@ -1,0 +1,17 @@
+---
+const { text } = Astro.props;
+---
+
+<h2>
+  {text}
+</h2>
+
+<style>
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1;
+    text-wrap: balance;
+    text-align: right;
+  }
+</style>

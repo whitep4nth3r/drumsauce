@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TranscriptionList from "../../components/TranscriptionList.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import PageSubtitle from "../../components/PageSubtitle.astro";
+import data from "../../../data/transcriptions.json";
+import { makeOgImageUrl } from "../../lib/cloudinary";
+import { sortByDateDesc } from "../../lib/transcriptions";
+
+const transcriptions = data;
+const sorted = sortByDateDesc(transcriptions);
+const pageUrl = `${Astro.site}transcriptions`;
+const ogUrl = makeOgImageUrl("All Transcriptions");
+---
+
+<Layout
+  title="Free Drum Transcriptions"
+  description="Browse a complete list of drum transcriptions available for free download from DRUMSAUCE."
+  image={ogUrl}
+  url={pageUrl}
+  active="transcriptions"
+>
+  <div class="top">
+    <PageHeader text="Browse Free Drum Transcriptions" />
+    <PageSubtitle text="Viewing all" />
+  </div>
+  <TranscriptionList transcriptions={sorted} />
+</Layout>
+
+<style>
+  .top {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import type { Transcription } from "../types/transcription";
+import TranscriptionCard from "./TranscriptionCard.astro";
+
+const { transcriptions } = Astro.props;
+---
+
+<ol>
+  {
+    transcriptions.map((t: Transcription) => (
+      <li>
+        <TranscriptionCard transcription={t} />
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  li {
+    margin: 0;
+    border-radius: var(--border-radius-base);
+  }
+</style>

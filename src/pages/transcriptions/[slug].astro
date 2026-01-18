@@ -1,0 +1,254 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Tags from "../../components/Tags.astro";
+import PageSubtitle from "../../components/PageSubtitle.astro";
+import Description from "../../components/Description.astro";
+import type { Transcription } from "../../types/transcription";
+import data from "../../../data/transcriptions.json";
+import PdfPreview from "../../components/PdfPreview.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { makeOgImageUrl } from "../../lib/cloudinary";
+
+export async function getStaticPaths() {
+  const transcriptions = data || [];
+  return transcriptions.map((t) => ({ params: { slug: t.slug } }));
+}
+
+const transcriptions: Transcription[] = data || [];
+const transcription = transcriptions.find((t) => t.slug === Astro.params.slug);
+
+if (!transcription) {
+  throw new Response("Not found", { status: 404 });
+}
+
+const pageUrl = `${Astro.site}transcriptions/${transcription.slug}`;
+const ogUrl = makeOgImageUrl(
+  `${transcription.song} by ${transcription.artist}`,
+);
+---
+
+<Layout
+  title={`${transcription.song} by ${transcription.artist} free drum transcription`}
+  description={transcription.description}
+  image={ogUrl}
+  url={pageUrl}
+  active="transcriptions"
+>
+  <div class="layout">
+    <div class="top">
+      <img
+        style={`view-transition-name: album-cover-${transcription.slug};`}
+        alt={`Album cover for ${transcription.song} by ${transcription.artist}`}
+        height="500"
+        width="500"
+        src={`https://coverartarchive.org/release/${transcription.mbReleaseId}/front-500`}
+      />
+      <div class="top__right">
+        <div class="page__tags">
+          <Tags genre={transcription.genre} live={transcription.live} />
+        </div>
+        <div class="song__wrapper">
+          <PageHeader text={transcription.song} vtName={transcription.slug} />
+        </div>
+        <h2 class="page__meta">
+          {transcription.artist} / {transcription.album} / {transcription.year}
+        </h2>
+        <div class="description__wrapper">
+          <Description text={transcription.description} />
+        </div>
+      </div>
+    </div>
+
+    <div class="pdfPreview">
+      <PdfPreview url={`/transcriptions/${transcription.slug}.pdf`} />
+      <p class="watermark">preview</p>
+    </div>
+
+    <div>
+      <a
+        class="download"
+        href={`/transcriptions/${transcription.slug}.pdf`}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Download full score (PDF)
+      </a>
+    </div>
+
+    <PageSubtitle text="Listen along" />
+
+    <div class="video">
+      <button type="button" class="cookieAccept" data-accept
+        >Click to activate YouTube video and accept cookies provided by YouTube</button
+      >
+      <iframe
+        width="100%"
+        height="auto"
+        src={`https://www.youtube-nocookie.com/embed/${transcription.youtubeId}`}
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</Layout>
+
+<script type="module">
+  const btn = document.querySelector("[data-accept]");
+
+  btn.addEventListener("click", () => {
+    btn.remove();
+  });
+</script>
+
+<style>
+  .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .top {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
+  }
+
+  .top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-base);
+    box-shadow:
+      0.25rem 0.25rem 0px rgba(0, 0, 0, 0.5),
+      0.5rem 0.5rem 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .top__right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .goback {
+    text-transform: uppercase;
+    color: var(--color-fg);
+    font-weight: 400;
+    text-decoration: underline;
+    text-decoration-thickness: 0.25rem;
+    text-underline-offset: 0.25rem;
+    font-size: 1rem;
+  }
+
+  .description__wrapper {
+    max-width: 60ch;
+    text-align: right;
+    display: flex;
+    align-items: flex-end;
+    display: flex;
+    width: 100%;
+  }
+
+  .page__tags {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .page__meta {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    line-height: 1.2;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    color: var(--color-fg);
+  }
+
+  .song__wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .download {
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 0.25rem solid var(--color-accent);
+    background: var(--color-accent);
+    border-radius: var(--border-radius-base);
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+    font-size: 2rem;
+    margin: auto;
+    display: flex;
+    width: max-content;
+  }
+
+  .download:hover,
+  .download:focus,
+  .download:focus-visible {
+    outline: 0.25rem solid black;
+    outline-offset: 0;
+  }
+
+  .pdfPreview {
+    text-align: center;
+    position: relative;
+    border: 0.25rem solid black;
+    border-radius: var(--border-radius-base);
+    box-shadow:
+      0.25rem 0.25rem 0px rgba(0, 0, 0, 0.5),
+      0.5rem 0.5rem 0px rgba(0, 0, 0, 0.25);
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .watermark {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    font-size: 14rem;
+    text-transform: uppercase;
+    color: black;
+    opacity: 0.2;
+    font-family: var(--font-display);
+  }
+
+  .video {
+    position: relative;
+  }
+
+  .video iframe {
+    aspect-ratio: 16/9;
+  }
+
+  .cookieAccept {
+    appearance: none;
+    background: white;
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 0.25rem solid var(--color-fg);
+    border-radius: var(--border-radius-base);
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-fg);
+    font-family: var(--font-main);
+    font-size: 2rem;
+  }
+
+  .cookieAccept:hover,
+  .cookieAccept:focus,
+  .cookieAccept:focus-visible {
+    outline: 0.25rem solid var(--color-accent);
+    outline-offset: 0;
+  }
+</style>

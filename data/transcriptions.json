@@ -1,0 +1,47 @@
+[
+  {
+    "date": "2025-12-01T00:00:00Z",
+    "artist": "Salin",
+    "song": "Painted Lady",
+    "album": "Rammana",
+    "genre": "jazz",
+    "year": 2025,
+    "version": "1",
+    "live": true,
+    "youtubeId": "9faExv8q7YM",
+    "songUrl": "",
+    "description": "This recording features a very unique kit that isn't specified in the transcription. For maximum satisfaction, be creative with your interpretation!",
+    "slug": "salin-painted-lady",
+    "mbReleaseId": "45a2405e-5f9c-4b2e-9e8a-5c0a368d1d8d"
+  },
+  {
+    "date": "2024-02-01T00:00:00Z",
+    "artist": "The Night Game",
+    "song": "The Outfield",
+    "album": "The Night Game",
+    "genre": "rock",
+    "year": 2018,
+    "version": "1",
+    "live": false,
+    "youtubeId": "D_tg0FWsSBA",
+    "songUrl": "",
+    "description": "This track is particularly interesting given the kick drum doesn't usually fall on the first beat of the bar.",
+    "slug": "the-night-game-the-outfield",
+    "mbReleaseId": "22031543-725d-41c6-b348-ec9bcd9bfda4"
+  },
+  {
+    "date": "2026-01-16T00:00:00Z",
+    "artist": "Windwaker",
+    "song": "Venom",
+    "album": "HYPERVIOLENCE",
+    "genre": "metal",
+    "year": 2024,
+    "version": "1",
+    "live": false,
+    "youtubeId": "m_Fid2dflX0",
+    "songUrl": "",
+    "description": "This rap vs nu-metal track is groovy as heck, even if the opening riff does sound like the infamous Cbat song.",
+    "slug": "windwaker-venom",
+    "mbReleaseId": "b5c8bf2e-a34f-492b-8a04-9e450cc602ec"
+  }
+]

@@ -1,0 +1,33 @@
+---
+const { genre, live } = Astro.props;
+---
+
+<div class="tags">
+  <p class={`type`}>
+    {genre}
+  </p>
+  {live && <p class={`type type--live`}>live</p>}
+</div>
+
+<style>
+  .tags {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .type {
+    display: inline-flex;
+    width: max-content;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-base);
+    font-weight: 600;
+    color: white;
+    background: black;
+    text-transform: uppercase;
+  }
+
+  .type--live {
+    background: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import PageSubtitle from "../components/PageSubtitle.astro";
+import { makeOgImageUrl } from "../lib/cloudinary";
+
+const pageUrl = `${Astro.site}request`;
+const ogUrl = makeOgImageUrl("Request a transcription");
+---
+
+<Layout
+  title="Request a transcription"
+  description="Fill out this quick form to request a new drum transcription from DRUMSAUCE."
+  image={ogUrl}
+  url={pageUrl}
+  active="request"
+>
+  <div class="top">
+    <PageHeader text="Request a transcription" />
+    <PageSubtitle text="Fill out the form!" />
+  </div>
+</Layout>
+
+<style>
+  .top {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+  }
+</style>

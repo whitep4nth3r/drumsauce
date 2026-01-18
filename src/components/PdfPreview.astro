@@ -1,0 +1,44 @@
+---
+import pdfjsUrl from "pdfjs-dist/legacy/build/pdf.mjs?url";
+import workerUrl from "pdfjs-dist/legacy/build/pdf.worker.mjs?url";
+
+const { url } = Astro.props;
+---
+
+<canvas
+  id="pdf-canvas"
+  data-url={url}
+  data-pdfjs-url={pdfjsUrl}
+  data-worker-url={workerUrl}></canvas>
+
+<script type="module">
+  const canvas = document.getElementById("pdf-canvas");
+
+  if (canvas) {
+    const url = canvas.dataset.url;
+    const pdfjsUrl = canvas.dataset.pdfjsUrl;
+    const workerUrl = canvas.dataset.workerUrl;
+    // @ts-ignore
+    const ctx = canvas.getContext("2d");
+
+    const pdfjs = await import(`${pdfjsUrl}`);
+    pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
+
+    const pdf = await pdfjs.getDocument(url).promise;
+    const page = await pdf.getPage(1);
+
+    const viewport = page.getViewport({ scale: 1 });
+
+    const parentWidth = canvas.parentElement?.clientWidth || viewport.width;
+    const scale = parentWidth / viewport.width;
+
+    const scaledViewport = page.getViewport({ scale });
+
+    // @ts-ignore
+    canvas.width = scaledViewport.width;
+    // @ts-ignore
+    canvas.height = scaledViewport.height;
+
+    await page.render({ canvasContext: ctx, viewport: scaledViewport }).promise;
+  }
+</script>
