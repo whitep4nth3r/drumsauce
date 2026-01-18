@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import PageSubtitle from "../components/PageSubtitle.astro";
+import { makeOgImageUrl } from "../lib/cloudinary";
+
+const SITE_URL = Astro.site;
+const pageUrl = `${SITE_URL}about`;
+const ogUrl = makeOgImageUrl("About");
+---
+
+<Layout
+  title="DRUMSAUCE 404"
+  description="Sorry, this page doesn't exist."
+  image={ogUrl}
+  url={pageUrl}
+  active=""
+>
+  <div class="top">
+    <PageHeader text="DRUMSAUCE 404" />
+    <PageSubtitle text="Sorry, this page doesn't exist." />
+  </div>
+</Layout>
+
+<style>
+  .top {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
+</style>
