@@ -28,7 +28,7 @@ const { transcription } = Astro.props;
     <Description text={transcription.description} />
     <a
       class="get"
-      href={`/transcriptions/${transcription.slug}`}
+      href={`/transcriptions/${transcription.slug}/`}
       aria-label={`Get PDF transcription for ${transcription.song} by ${transcription.artist}`}
     >
       Get transcription
