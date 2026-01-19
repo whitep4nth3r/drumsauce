@@ -11,30 +11,32 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#ff3864" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
-    {description && <meta property="og:description" content={description} />}
+    <meta property="og:description" content={description} />
     <meta property="og:site_name" content="DRUMSAUCE" />
     <meta property="og:url" content={url} />
     {image && <meta property="og:image" content={image} />}
 
-    <meta
-      name="twitter:card"
-      content={image ? "summary_large_image" : "summary"}
-    />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    {description && <meta name="twitter:description" content={description} />}
-    {image && <meta name="twitter:image" content={image} />}
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <script
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <link rel="sitemap" href="/sitemap-index.xml" /><script
       src="https://analytics.ahrefs.com/analytics.js"
       data-key="Jm/NbLi3x2vOGFM6PgRVWQ"
       async></script>
+
     <meta
       name="ahrefs-site-verification"
       content="94d7e941da97f60c01de0a2e8983b05fb5194a63bd79cad02f6ef7da26ee87c3"
@@ -67,19 +69,19 @@ const year = new Date().getFullYear();
               <li>
                 <a
                   class={`header__link${active === "transcriptions" ? ` header__link--active` : ``}`}
-                  href="/transcriptions">Transcriptions</a
+                  href="/transcriptions/">Transcriptions</a
                 >
               </li>
               <li>
                 <a
                   class={`header__link${active === "request" ? ` header__link--active` : ``}`}
-                  href="/request">Request</a
+                  href="/request/">Request</a
                 >
               </li>
               <li>
                 <a
                   class={`header__link${active === "about" ? ` header__link--active` : ``}`}
-                  href="/about">About</a
+                  href="/about/">About</a
                 >
               </li>
               <li>
