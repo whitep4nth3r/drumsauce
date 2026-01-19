@@ -5,12 +5,12 @@ import PageSubtitle from "../components/PageSubtitle.astro";
 import { makeOgImageUrl } from "../lib/cloudinary";
 
 const pageUrl = `${Astro.site}request`;
-const ogUrl = makeOgImageUrl("Request a transcription");
+const ogUrl = makeOgImageUrl("Request a new drum transcription");
 ---
 
 <Layout
-  title="Request a transcription"
-  description="Fill out this quick form to request a new drum transcription from DRUMSAUCE."
+  title="Request a new drum transcription"
+  description="Fill out this quick form to request a new drum transcription from DRUMSAUCE. We'll get back to you when it's added to the site!"
   image={ogUrl}
   url={pageUrl}
   active="request"

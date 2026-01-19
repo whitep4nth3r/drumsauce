@@ -5,18 +5,18 @@ function cleanText(text: string) {
 }
 
 export function makeOgImageUrl(title: string) {
-  const baseTitleSize = 20;
+  const baseTitleSize = 100;
   const cleanTitle = cleanText(title);
 
   const titleConfig = [
-    `w_900`,
+    `w_700`,
     "c_fit",
-    "g_north_west",
-    "co_rgb:ffffff",
-    `x_20`,
-    `y_20`,
-    `l_text:Anton_${baseTitleSize}__line_spacing_-40:${cleanTitle})}`,
+    "g_east",
+    "co_rgb:000000",
+    `x_40`,
+    `y_0`,
+    `l_text:Anton_${baseTitleSize}_right___line_spacing_-50:${cleanTitle}`,
   ].join(",");
 
-  return `https://res.cloudinary.com/whitep4nth3r/image/upload/${titleConfig}/drumsauce-og.png`;
+  return `https://res.cloudinary.com/whitep4nth3r/image/upload/${titleConfig}/drumsauce_og.png`;
 }
