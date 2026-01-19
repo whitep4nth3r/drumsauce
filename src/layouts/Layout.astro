@@ -46,9 +46,12 @@ const year = new Date().getFullYear();
   </head>
   <body>
     <div class="container">
+      <a href="#main" class="header__skipToMainContent">
+        Skip to main content
+      </a>
       <div class="container__left">
         <div class="logo">
-          <a href="/">
+          <a href="/" aria-label="Go to home page">
             <Logo />
           </a>
         </div>
@@ -86,7 +89,7 @@ const year = new Date().getFullYear();
           </nav>
         </header>
       </div>
-      <main class="container__right">
+      <main id="main" class="container__right">
         <slot />
       </main>
     </div>
@@ -122,6 +125,7 @@ const year = new Date().getFullYear();
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
+      position: relative;
 
       @media screen and (min-width: 1000px) {
         align-items: flex-start;
@@ -158,6 +162,10 @@ const year = new Date().getFullYear();
     }
 
     .header {
+    }
+
+    .logo {
+      border-radius: var(--border-radius-base);
     }
 
     .logo a:focus,
@@ -200,6 +208,36 @@ const year = new Date().getFullYear();
     .header__link:focus,
     .header__link:focus-visible {
       outline: 0.25rem solid var(--color-accent);
+    }
+
+    .header__skipToMainContent {
+      font-family: var(--font-main);
+      font-weight: 600;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      color: var(--color-bg);
+      text-decoration: none;
+      font-size: 1rem;
+      line-height: 1;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius-base);
+      margin-bottom: 0.5rem;
+      position: absolute;
+      top: -100px;
+      transform: translateX(-50%);
+      left: 50%;
+      background-color: var(--color-fg);
+      z-index: 15;
+    }
+
+    .header__skipToMainContent:focus,
+    .header__skipToMainContent:focus-visible {
+      top: 0;
+      outline: 0.25rem solid var(--color-accent);
+      outline-offset: 0;
     }
 
     footer {
