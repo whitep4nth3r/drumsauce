@@ -12,6 +12,12 @@ export default defineConfig({
     sitemap({
       changefreq: "weekly",
       lastmod: new Date(),
+      filter: (page) => {
+        if (page.includes("/thanks")) {
+          return false;
+        }
+        return true;
+      },
     }),
   ],
 });
